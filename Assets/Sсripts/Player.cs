@@ -24,9 +24,9 @@ public class Player : MonoBehaviour
 
     private Animator _animator;
     private Transform _transform;
-    private HashAnimationRogue_01 HashAnimationRogue_01 = new HashAnimationRogue_01();
+    private HashAnimationRogue HashAnimationRogue = new HashAnimationRogue();
 
-    void OnEnable()
+    private void OnEnable()
     {
         rb2d = GetComponent<Rigidbody2D>();
     }
@@ -37,37 +37,37 @@ public class Player : MonoBehaviour
         _transform = GetComponent<Transform>();
     }
 
-    void Start()
+    private void Start()
     {
         contactFilter.useTriggers = false;
         contactFilter.SetLayerMask(LayerMask);
         contactFilter.useLayerMask = true;
     }
 
-    void Update()
+    private void Update()
     {
         targetVelocity = new Vector2(Input.GetAxis("Horizontal") * Speed, 0);
 
         if (0 < Velocity.x)
         {
             _transform.rotation = new Quaternion(0, 0, 0, 0);
-            _animator.SetBool(HashAnimationRogue_01.IsGoes, true);
+            _animator.SetBool(HashAnimationRogue.IsGoes, true);
         }
         else if (Velocity.x < 0)
         {
             _transform.rotation = new Quaternion(0, 180, 0, 0);
-            _animator.SetBool(HashAnimationRogue_01.IsGoes, true);
+            _animator.SetBool(HashAnimationRogue.IsGoes, true);
         }
         else
         {
-            _animator.SetBool(HashAnimationRogue_01.IsGoes, false);
+            _animator.SetBool(HashAnimationRogue.IsGoes, false);
         }
 
         if (Input.GetKey(KeyCode.Space) && grounded)
             Velocity.y = 5;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         Velocity += GravityModifier * Physics2D.gravity * Time.deltaTime;
         Velocity.x = targetVelocity.x;
@@ -85,7 +85,7 @@ public class Player : MonoBehaviour
         Movement(move, true);
     }
 
-    void Movement(Vector2 move, bool yMovement)
+    private void Movement(Vector2 move, bool yMovement)
     {
 
         float distance = move.magnitude;
