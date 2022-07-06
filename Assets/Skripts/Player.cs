@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
 
     private Animator _animator;
     private Transform _transform;
+    private HashAnimationRogue_01 HashAnimationRogue_01 = new HashAnimationRogue_01();
 
     void OnEnable()
     {
@@ -50,16 +51,16 @@ public class Player : MonoBehaviour
         if (0 < Velocity.x)
         {
             _transform.rotation = new Quaternion(0, 0, 0, 0);
-            _animator.SetBool("IsGoes", true);
+            _animator.SetBool(HashAnimationRogue_01.IsGoes, true);
         }
         else if (Velocity.x < 0)
         {
             _transform.rotation = new Quaternion(0, 180, 0, 0);
-            _animator.SetBool("IsGoes", true);
+            _animator.SetBool(HashAnimationRogue_01.IsGoes, true);
         }
         else
         {
-            _animator.SetBool("IsGoes", false);
+            _animator.SetBool(HashAnimationRogue_01.IsGoes, false);
         }
 
         if (Input.GetKey(KeyCode.Space) && grounded)

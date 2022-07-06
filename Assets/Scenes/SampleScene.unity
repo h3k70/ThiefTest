@@ -433,8 +433,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e2f842dd688cf41853b46d22af9dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _outsideWall: {fileID: 1397075359}
-  PlayerGone:
+  _outsideWall: {fileID: 1397075364}
+  _playerGone:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &242052361
@@ -3193,7 +3193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6e0ea44f77154f4b9a1d04a772b9710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialValume: 0.1
+  _house: {fileID: 65323299}
+  _MaxValume: 1
   _attenuationRate: 2
   _frequencyColorChange: 0.5
 --- !u!1 &1817957202
