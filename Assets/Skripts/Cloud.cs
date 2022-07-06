@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Transform))]
-
 public class Cloud : MonoBehaviour
 {
     [SerializeField] private float _maxSpeed = 0.4f;

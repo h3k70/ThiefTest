@@ -11,57 +11,59 @@ public class AlarmSystem : MonoBehaviour
     [SerializeField] private float _frequencyColorChange = 0.5f;
 
     private float _runningTime;
-    private bool _alarm = false;
+    private bool _IsAlarmed = false;
 
     private AudioSource _audioSource;
+    private SpriteRenderer _spriteRenderer;
 
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
-        GetComponentInParent<House>().PlayerGone.AddListener(StartAttenuationAlarm);
+        GetComponentInParent<House>().PlayerGone += StartAttenuationAlarm;
+        _spriteRenderer = GetComponentInParent<SpriteRenderer>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<Player>(out Player player))
-            Alarm();
+            RaiseAlarm();
     }
 
-    private void Alarm()
+    private void RaiseAlarm()
     {
-        if (_alarm == false)
+        if (_IsAlarmed == false)
         {
-            _alarm = true;
+            _IsAlarmed = true;
             _audioSource.Play();
             _audioSource.volume = _initialValume;
-            StartCoroutine(AlarmColor());
+            StartCoroutine(FlashingAlarm());
         }
     }
 
     private void StartAttenuationAlarm()
     {
-        if (_alarm == true)
+        if (_IsAlarmed == true)
             StartCoroutine(AttenuationAlarm());
     }
 
-    private IEnumerator AlarmColor()
+    private IEnumerator FlashingAlarm()
     {
         var wait = new WaitForSeconds(_frequencyColorChange);
 
-        while (_alarm)
+        while (_IsAlarmed)
         {
-            GetComponent<SpriteRenderer>().color = Color.red;
+            _spriteRenderer.color = Color.red;
             yield return wait;
-            GetComponent<SpriteRenderer>().color = Color.white;
+            _spriteRenderer.color = Color.white;
             yield return wait;
         }
     }
     private IEnumerator AttenuationAlarm()
     {
         _runningTime = 0;
-        _alarm = false;
+        _IsAlarmed = false;
 
-        while (_audioSource.volume > 0 && _alarm == false)
+        while (_audioSource.volume > 0 && _IsAlarmed == false)
         {
             _runningTime += Time.deltaTime;
             _audioSource.volume = _initialValume * (1 - _runningTime / _attenuationRate);

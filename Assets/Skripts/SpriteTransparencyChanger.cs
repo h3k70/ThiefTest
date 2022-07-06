@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Animation))]
 
-public class ChangingTransparency : MonoBehaviour
+public class SpriteTransparencyChanger : MonoBehaviour
 {
     [SerializeField] private Animation _animation;
+
+    private const string HideSprite = "HideSprite";
+    private const string ShowSprite = "ShowSprite";
 
     private void Awake()
     {
@@ -14,11 +17,11 @@ public class ChangingTransparency : MonoBehaviour
     }
     public void Hide()
     {
-        _animation.Play("HideSprite");
+        _animation.Play(HideSprite);
     }
 
     public void Show()
     {
-        _animation.Play("ShowSprite");
+        _animation.Play(ShowSprite);
     }
 }

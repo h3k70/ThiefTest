@@ -6,22 +6,27 @@ using UnityEngine.Events;
 public class House : MonoBehaviour
 {
     [SerializeField] private GameObject _outsideWall;
+    [SerializeField] private UnityEvent _playerGone;
 
-    public UnityEvent PlayerGone;
+    public event UnityAction PlayerGone
+    {
+        add => _playerGone.AddListener(value);
+        remove => _playerGone.RemoveListener(value);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<Player>(out Player player))
         {
-            _outsideWall.GetComponent<ChangingTransparency>().Hide();
+            _outsideWall.GetComponent<SpriteTransparencyChanger>().Hide();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent<Player>(out Player player))
         {
-            PlayerGone.Invoke();
-            _outsideWall.GetComponent<ChangingTransparency>().Show();
+            _playerGone.Invoke();
+            _outsideWall.GetComponent<SpriteTransparencyChanger>().Show();
         }
     }
 }
