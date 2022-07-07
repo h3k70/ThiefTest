@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     protected Vector2 targetVelocity;
     protected bool grounded;
     protected Vector2 groundNormal;
-    protected Rigidbody2D rigidbody2D;
+    protected Rigidbody2D rb2d;
     protected ContactFilter2D contactFilter;
     protected RaycastHit2D[] hitBuffer = new RaycastHit2D[16];
     protected List<RaycastHit2D> hitBufferList = new List<RaycastHit2D>(16);
@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rb2d = GetComponent<Rigidbody2D>();
     }
 
     private void Awake()
@@ -84,7 +84,7 @@ public class Player : MonoBehaviour
 
         if (distance > minMoveDistance)
         {
-            int count = rigidbody2D.Cast(move, contactFilter, hitBuffer, distance + shellRadius);
+            int count = rb2d.Cast(move, contactFilter, hitBuffer, distance + shellRadius);
 
             hitBufferList.Clear();
 
@@ -117,6 +117,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        rigidbody2D.position = rigidbody2D.position + move.normalized * distance;
+        rb2d.position = rb2d.position + move.normalized * distance;
     }
 }

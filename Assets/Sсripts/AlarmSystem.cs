@@ -14,6 +14,7 @@ public class AlarmSystem : MonoBehaviour
     private float _runningTime;
     private bool _IsAlarmed = false;
     private float _currentVolume;
+    private Coroutine _changingVolumeJob;
 
     private AudioSource _audioSource;
     private SpriteRenderer _spriteRenderer;
@@ -22,30 +23,39 @@ public class AlarmSystem : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _house.PlayerGone += StartAttenuationAlarmSound;
+        _house.PlayerGone += StopAlarm;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<Player>(out Player player))
-            RaiseAlarm();
+        {
+            if (_IsAlarmed == false)
+            {
+                RaiseAlarm();
+            }
+        }
     }
 
     private void RaiseAlarm()
     {
-        if (_IsAlarmed == false)
-        {
-            _IsAlarmed = true;
-            _audioSource.Play();
-            StartCoroutine(FlashingAlarm());
-            StartCoroutine(IncreaseAlarmSound());
-        }
-    }
+        _IsAlarmed = true;
+        _audioSource.Play();
+        StartCoroutine(FlashingAlarm());
 
-    private void StartAttenuationAlarmSound()
+        if (_changingVolumeJob != null)
+            StopCoroutine(_changingVolumeJob);
+
+        _changingVolumeJob = StartCoroutine(ChangingVolume(_MaxValume));
+    }
+    private void StopAlarm()
     {
-        if (_IsAlarmed == true)
-            StartCoroutine(AttenuationAlarmSound());
+        if (_IsAlarmed)
+        {
+            _IsAlarmed = false;
+            StopCoroutine(_changingVolumeJob);
+            _changingVolumeJob = StartCoroutine(ChangingVolume(0));
+        }
     }
 
     private IEnumerator FlashingAlarm()
@@ -61,30 +71,15 @@ public class AlarmSystem : MonoBehaviour
         }
     }
 
-    private IEnumerator IncreaseAlarmSound()
+    private IEnumerator ChangingVolume(float boundaryValue)
     {
         _runningTime = 0;
         _currentVolume = _audioSource.volume;
 
-        while (_audioSource.volume < _MaxValume && _IsAlarmed == true)
+        while (_audioSource.volume != boundaryValue)
         {
             _runningTime += Time.deltaTime;
-            _audioSource.volume = Mathf.MoveTowards(_currentVolume, _MaxValume, _runningTime / _duration);
-
-            yield return null;
-        }
-    }
-
-    private IEnumerator AttenuationAlarmSound()
-    {
-        _runningTime = 0;
-        _IsAlarmed = false;
-        _currentVolume = _audioSource.volume;
-
-        while (_audioSource.volume > 0 && _IsAlarmed == false)
-        {
-            _runningTime += Time.deltaTime;
-            _audioSource.volume = Mathf.MoveTowards(_currentVolume, 0, _runningTime / _duration);
+            _audioSource.volume = Mathf.MoveTowards(_currentVolume, boundaryValue, _runningTime / _duration);
 
             yield return null;
         }
