@@ -2046,10 +2046,6 @@ MonoBehaviour:
   MinGroundNormalY: 0.65
   GravityModifier: 1
   Speed: 3
-  Velocity: {x: 0, y: 0}
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!50 &1514305772
 Rigidbody2D:
   serializedVersion: 4
@@ -3195,7 +3191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _house: {fileID: 65323299}
   _MaxValume: 1
-  _attenuationRate: 2
+  _duration: 2
   _frequencyColorChange: 0.5
 --- !u!1 &1817957202
 GameObject:
