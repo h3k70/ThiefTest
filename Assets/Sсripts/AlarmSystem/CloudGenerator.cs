@@ -14,10 +14,10 @@ public class CloudGenerator : MonoBehaviour
     private void Awake()
     {
         _isRunning = true;
-        StartCoroutine(Generation());
+        StartCoroutine(Generate());
     }
 
-    private IEnumerator Generation()
+    private IEnumerator Generate()
     {
         var wait = new WaitForSeconds(_period);
 

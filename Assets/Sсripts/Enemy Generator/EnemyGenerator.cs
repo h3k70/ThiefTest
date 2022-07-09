@@ -8,18 +8,18 @@ public class EnemyGenerator : MonoBehaviour
     [SerializeField] private GameObject[] _templats;
 
     private GameObject _template;
-    private SpawnEnemies[] _spawnPoints;
-    private SpawnEnemies _spawnPoint;
+    private Transform[] _spawnPoints;
+    private Transform _spawnPoint;
     private bool _isRunning = false;
 
     private void Awake()
     {
         _isRunning = true;
-        _spawnPoints = gameObject.GetComponentsInChildren<SpawnEnemies>();
-        StartCoroutine(Generation());
+        _spawnPoints = gameObject.GetComponentsInChildren<Transform>();
+        StartCoroutine(Generate());
     }
 
-    private IEnumerator Generation()
+    private IEnumerator Generate()
     {
         var wait = new WaitForSeconds(_period);
 
@@ -28,7 +28,7 @@ public class EnemyGenerator : MonoBehaviour
             _template = _templats[Random.Range(0, _templats.Length)];
             _spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
 
-            _spawnPoint.CreateEemy(_template);
+            GameObject newObject = Instantiate(_template, _spawnPoint.transform.position, Quaternion.identity);
 
             yield return wait;
         }
