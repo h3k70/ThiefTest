@@ -1468,6 +1468,7 @@ GameObject:
   - component: {fileID: 95000010530816694}
   - component: {fileID: -3989151841702224230}
   - component: {fileID: -4964331144823067316}
+  - component: {fileID: 6369563467453082712}
   m_Layer: 0
   m_Name: Rogue_02
   m_TagString: Untagged
@@ -1558,6 +1559,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6369563467453082712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013301305156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4885d5d7d3f422040ae977930a43cacb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1000013442129446
 GameObject:
   m_ObjectHideFlags: 0

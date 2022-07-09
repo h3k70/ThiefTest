@@ -537,12 +537,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _period: 2
   _templats:
-  - {fileID: 1000010208881502, guid: 722924ec8a0056f4a8fb443b2fb65ff9, type: 3}
-  - {fileID: 1000013301305156, guid: 7ac6bdc2e4b5e47468b8b460ca863a5f, type: 3}
-  - {fileID: 1000013234968400, guid: 4a6e9a7d544412d4d92db88d8587228e, type: 3}
-  - {fileID: 1000011922212602, guid: b3d1057caadaef44ab620edfef78b14f, type: 3}
-  - {fileID: 1000013304306144, guid: 30ef59945f2a7ea499bbbe10a7d48f1a, type: 3}
-  - {fileID: 1000011821036864, guid: 5b210609803658e488f512fc13a6163e, type: 3}
+  - {fileID: 3174267550575411980, guid: 722924ec8a0056f4a8fb443b2fb65ff9, type: 3}
+  - {fileID: 6369563467453082712, guid: 7ac6bdc2e4b5e47468b8b460ca863a5f, type: 3}
+  - {fileID: -4418586907148465820, guid: 4a6e9a7d544412d4d92db88d8587228e, type: 3}
+  - {fileID: 7142922322994312725, guid: b3d1057caadaef44ab620edfef78b14f, type: 3}
+  - {fileID: 6124443383168046780, guid: 30ef59945f2a7ea499bbbe10a7d48f1a, type: 3}
+  - {fileID: -5755646074217843524, guid: 5b210609803658e488f512fc13a6163e, type: 3}
 --- !u!1 &937958786
 GameObject:
   m_ObjectHideFlags: 0

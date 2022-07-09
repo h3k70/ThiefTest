@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyGenerator : MonoBehaviour
 {
     [SerializeField] private float _period = 2f;
-    [SerializeField] private GameObject[] _templats;
+    [SerializeField] private Enemy[] _templats;
 
-    private GameObject _template;
+    private Enemy _template;
     private Transform[] _spawnPoints;
     private Transform _spawnPoint;
     private bool _isRunning = false;
@@ -28,7 +28,7 @@ public class EnemyGenerator : MonoBehaviour
             _template = _templats[Random.Range(0, _templats.Length)];
             _spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
 
-            GameObject newObject = Instantiate(_template, _spawnPoint.transform.position, Quaternion.identity);
+            var newObject = Instantiate(_template, _spawnPoint.transform.position, Quaternion.identity);
 
             yield return wait;
         }
