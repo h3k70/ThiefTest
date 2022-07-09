@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class СloudGenerator : MonoBehaviour
+public class CloudGenerator : MonoBehaviour
 {
     [SerializeField] private float _period = 20f;
     [SerializeField] private float _spread = 1f;

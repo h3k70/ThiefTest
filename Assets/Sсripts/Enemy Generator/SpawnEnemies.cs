@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class SpawnEnemies : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void CreateEemy(GameObject enemy)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GameObject newObject = Instantiate(enemy, transform.position, Quaternion.identity);
     }
 }
